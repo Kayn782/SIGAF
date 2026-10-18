@@ -1,0 +1,85 @@
+[versions]
+# Sistema — ALINEADO con el Android Studio de este equipo (2026)
+agp = "9.4.1"
+kotlin = "2.2.10"
+
+# AndroidX / UI
+coreKtx = "1.19.1"
+activityCompose = "1.13.0"
+composeBom = "2026.02.01"
+materialIcons = "1.7.8"          # última publicación de material-icons-extended
+lifecycle = "2.11.0"
+navigationCompose = "2.10.2"
+
+# Red y serialización
+retrofit = "2.12.0"
+okhttp = "4.12.0"
+kotlinxSerialization = "1.11.0"
+kotlinxCoroutines = "1.10.2"
+
+# Almacenamiento local
+room = "2.8.5"
+datastore = "1.2.1"
+
+# Seguridad
+securityCrypto = "1.1.0"
+
+# Segundo plano
+work = "2.12.0"
+
+# Pruebas
+junit = "4.13.2"
+androidxJunit = "1.3.0"
+espresso = "3.7.0"
+
+[libraries]
+# AndroidX / Núcleo
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+# Jetpack Compose (la BOM fija las versiones de los artefactos compose.*)
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+# Los iconos Material dejaron de publicarse (última 1.7.8): por eso se fija su versión a mano.
+compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIcons" }
+
+# Ciclo de vida (ViewModel + Flow en Compose)
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+
+# Navegación
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+# Red
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+# Room (historial y caché) — el compilador (KSP) se añadirá en el Bloque 4
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+# DataStore (preferencias)
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# Seguridad (Keystore / EncryptedSharedPreferences)
+security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+
+# WorkManager (segundo plano)
+work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
+
+# Pruebas
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

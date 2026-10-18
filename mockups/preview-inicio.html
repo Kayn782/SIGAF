@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SIGAF · Vista previa de la pantalla Inicio</title>
+<style>
+  :root{
+    --bg:#000000; --surface:#0B0C0F; --card:#15171C; --border:#24272F; --outline:#2A2E37;
+    --t1:#F4F6FA; --t2:#9BA4B4; --t3:#6C7484;
+    --green:#22C55E; --amber:#FACC15; --orange:#F97316; --red:#EF4444; --gray:#94A3B8; --blue:#38BDF8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#1b1d21; min-height:100vh; padding:36px 16px;
+    display:flex; flex-direction:column; align-items:center; gap:18px;
+    font-family:'Segoe UI',Roboto,system-ui,-apple-system,sans-serif;
+  }
+  .label{color:#8b93a1; font-size:13px; letter-spacing:.3px}
+  /* --- Marco del telefono --- */
+  .phone{
+    width:390px; height:844px; background:var(--bg); border-radius:38px;
+    border:8px solid #2c2f36; box-shadow:0 24px 60px rgba(0,0,0,.6);
+    overflow:hidden; position:relative;
+  }
+  .statusbar{
+    height:34px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 22px; color:var(--t1); font-size:12px; font-weight:600;
+  }
+  .notch{width:96px;height:22px;background:#0d0e11;border-radius:12px}
+  /* --- Contenido scrolleable --- */
+  .screen{height:calc(100% - 34px); overflow-y:auto; scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+  .content{padding:14px 20px 28px; display:flex; flex-direction:column; gap:16px}
+
+  /* --- Encabezado --- */
+  .header{display:flex; align-items:center; justify-content:space-between}
+  .greeting{font-size:30px; font-weight:700; letter-spacing:-.5px; color:var(--t1)}
+  .subtitle{font-size:14px; color:var(--t2); margin-top:2px}
+  .avatar{
+    width:46px;height:46px;border-radius:50%; display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#000; font-size:16px;
+    background:linear-gradient(135deg,#22C55E,#22C55E99);
+  }
+  /* --- Tarjetas --- */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:20px}
+  .card.xl{border-radius:24px}
+
+  /* --- Nivel de proteccion --- */
+  .protection{display:flex; gap:18px; align-items:center; padding:20px}
+  .ring-wrap{position:relative; width:148px; height:148px; flex:0 0 148px}
+  .ring-text{
+    position:absolute; inset:0; display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .ring-percent{font-size:34px;font-weight:700;color:var(--t1)}
+  .ring-caption{font-size:11px;font-weight:500;letter-spacing:.3px;color:var(--t2)}
+  .protection-info{flex:1}
+  .protection-title{font-size:16px;font-weight:600;color:var(--t2)}
+  .chip{
+    display:inline-block; margin-top:8px; padding:5px 10px; border-radius:999px;
+    background:rgba(34,197,94,.14); color:var(--green); font-size:12px; font-weight:600;
+  }
+  .protection-desc{margin-top:10px; font-size:12px; line-height:16px; color:var(--t2)}
+
+  /* --- Contadores --- */
+  .stats{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px}
+  .stat{padding:14px 10px; text-align:center; border-radius:16px}
+  .stat-icon{
+    width:36px;height:36px;border-radius:50%;margin:0 auto 8px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .stat-value{font-size:20px;font-weight:700;color:var(--t1)}
+  .stat-label{font-size:11px;font-weight:500;color:var(--t2);margin-top:2px;line-height:14px}
+
+  /* --- Grafica semanal --- */
+  .section-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 0}
+  .section-title{font-size:16px;font-weight:600;color:var(--t1)}
+  .section-action{font-size:12px;color:var(--t2)}
+  .chart{display:flex; align-items:flex-end; gap:8px; padding:16px}
+  .day{flex:1; display:flex; flex-direction:column; align-items:center}
+  .day-value{font-size:11px;color:var(--t2);margin-bottom:4px}
+  .bar-track{width:26px; height:132px; display:flex; align-items:flex-end}
+  .bar{
+    width:100%; border-radius:8px 8px 0 0; position:relative;
+    background:linear-gradient(180deg,#22C55E,#22C55E73);
+  }
+  .bar-threat{position:absolute;top:0;left:0;right:0;height:5px;background:var(--red);border-radius:8px 8px 0 0}
+  .day-label{font-size:11px;font-weight:600;color:var(--t2);margin-top:6px}
+  .legend{font-size:11px;color:var(--t2);padding:0 16px 16px}
+
+  /* --- Accesos rapidos --- */
+  .quick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .quick-card{padding:16px 0;text-align:center;border-radius:16px}
+  .quick-icon{
+    width:40px;height:40px;border-radius:50%;margin:0 auto 8px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .quick-label{font-size:12px;font-weight:600;color:var(--t1)}
+
+  /* --- Consejo --- */
+  .tip{display:flex;gap:12px;padding:16px}
+  .tip-icon{width:40px;height:40px;border-radius:50%;background:rgba(34,197,94,.14);display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+  .tip-title{font-size:16px;font-weight:600;color:var(--t1)}
+  .tip-body{font-size:12px;color:var(--t2);margin-top:4px;line-height:16px}
+  .tip-link{color:var(--green);font-size:14px;font-weight:600;margin-top:10px;display:inline-block}
+
+  /* --- Academia --- */
+  .academy{
+    border-radius:20px; padding:20px; position:relative; overflow:hidden;
+    background:linear-gradient(90deg,#1E1B4B,#4C1D95);
+  }
+  .academy-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.18}
+  .academy-title{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.2px}
+  .academy-body{font-size:12px;color:rgba(255,255,255,.78);margin-top:6px;line-height:16px;max-width:78%}
+  .academy-btn{
+    display:inline-block;margin-top:14px;padding:9px 18px;border-radius:10px;background:#fff;
+    color:#4C1D95;font-size:14px;font-weight:600;
+  }
+  .notice{font-size:11px;color:var(--t2);text-align:center;padding:0 8px;line-height:15px}
+
+  /* --- Barra de navegacion inferior --- */
+  .bottomnav{
+    position:absolute;bottom:0;left:0;right:0;height:78px;background:var(--surface);
+    border-top:1px solid var(--border); display:flex; align-items:flex-start; padding-top:10px;
+  }
+  .navitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--t2)}
+  .navitem.active{color:var(--green)}
+  .navlabel{font-size:11px;font-weight:600}
+  .navpill{background:rgba(34,197,94,.14);border-radius:16px;padding:4px 18px}
+</style>
+</head>
+<body>
+  <div class="label">Vista previa estática del diseño · pantalla <b>Inicio</b> (réplica del Compose real, valores al 1x)</div>
+
+  <div class="phone">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="notch"></div>
+      <span>▮▮▮ ⌁ ▰</span>
+    </div>
+
+    <div class="screen">
+      <div class="content">
+
+        <!-- 1. Encabezado -->
+        <div class="header">
+          <div>
+            <div class="greeting">Hola, Andrés 👋</div>
+            <div class="subtitle">Así está tu nivel de protección hoy</div>
+          </div>
+          <div class="avatar">A</div>
+        </div>
+
+        <!-- 2. Nivel de Protección -->
+        <div class="card xl protection">
+          <div class="ring-wrap">
+            <svg width="148" height="148" viewBox="0 0 148 148">
+              <g transform="rotate(-90 74 74)">
+                <circle cx="74" cy="74" r="67" fill="none" stroke="#2A2E37" stroke-width="14"/>
+                <circle cx="74" cy="74" r="67" fill="none" stroke="#22C55E" stroke-width="14"
+                        stroke-linecap="round" stroke-dasharray="366.3 421" />
+              </g>
+            </svg>
+            <div class="ring-text">
+              <span class="ring-percent">87%</span>
+              <span class="ring-caption">Protección</span>
+            </div>
+          </div>
+          <div class="protection-info">
+            <div class="protection-title">Nivel de Protección</div>
+            <span class="chip">Riesgo estimado: Bajo</span>
+            <div class="protection-desc">Tu configuración y tus análisis recientes indican una protección sólida. Mantén activo el análisis automático para seguir protegido.</div>
+          </div>
+        </div>
+
+        <!-- 3. Contadores -->
+        <div class="stats">
+          <div class="card stat">
+            <div class="stat-icon" style="background:rgba(34,197,94,.14)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/></svg>
+            </div>
+            <div class="stat-value">247</div>
+            <div class="stat-label">Análisis realizados</div>
+          </div>
+          <div class="card stat">
+            <div class="stat-icon" style="background:rgba(239,68,68,.14)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 9v5"/><path d="M12 17.5v.5"/></svg>
+            </div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Amenazas detectadas</div>
+          </div>
+          <div class="card stat">
+            <div class="stat-icon" style="background:rgba(56,189,248,.14)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg>
+            </div>
+            <div class="stat-value">86</div>
+            <div class="stat-label">Análisis automáticos</div>
+          </div>
+        </div>
+
+        <!-- 4. Actividad semanal -->
+        <div class="card">
+          <div class="section-head">
+            <span class="section-title">Actividad semanal</span>
+            <span class="section-action">Análisis de los últimos 7 días</span>
+          </div>
+          <div class="chart">
+            <div class="day"><span class="day-value">18</span><div class="bar-track"><div class="bar" style="height:58px"><div class="bar-threat"></div></div></div><span class="day-label">L</span></div>
+            <div class="day"><span class="day-value">32</span><div class="bar-track"><div class="bar" style="height:103px"><div class="bar-threat"></div></div></div><span class="day-label">M</span></div>
+            <div class="day"><span class="day-value">24</span><div class="bar-track"><div class="bar" style="height:77px"></div></div><span class="day-label">X</span></div>
+            <div class="day"><span class="day-value">41</span><div class="bar-track"><div class="bar" style="height:132px"><div class="bar-threat"></div></div></div><span class="day-label">J</span></div>
+            <div class="day"><span class="day-value">28</span><div class="bar-track"><div class="bar" style="height:90px"><div class="bar-threat"></div></div></div><span class="day-label">V</span></div>
+            <div class="day"><span class="day-value">12</span><div class="bar-track"><div class="bar" style="height:39px"><div class="bar-threat"></div></div></div><span class="day-label">S</span></div>
+            <div class="day"><span class="day-value">9</span><div class="bar-track"><div class="bar" style="height:29px"><div class="bar-threat"></div></div></div><span class="day-label">D</span></div>
+          </div>
+          <div class="legend">Segmento rojo: amenazas detectadas</div>
+        </div>
+
+        <!-- 5. Accesos rapidos -->
+        <div>
+          <div class="section-head" style="padding:0 0 12px"><span class="section-title">Análisis rápido</span></div>
+          <div class="quick">
+            <div class="card quick-card">
+              <div class="quick-icon" style="background:rgba(34,197,94,.14)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg>
+              </div>
+              <div class="quick-label">Mensaje</div>
+            </div>
+            <div class="card quick-card">
+              <div class="quick-icon" style="background:rgba(56,189,248,.14)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><path d="M10 14a4 4 0 0 1 0-6l2-2a4 4 0 0 1 6 6l-1 1"/><path d="M14 10a4 4 0 0 1 0 6l-2 2a4 4 0 0 1-6-6l1-1"/></svg>
+              </div>
+              <div class="quick-label">Enlace</div>
+            </div>
+            <div class="card quick-card">
+              <div class="quick-icon" style="background:rgba(250,204,21,.14)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
+              </div>
+              <div class="quick-label">Remitente</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Consejo del dia -->
+        <div class="card tip">
+          <div class="tip-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3 11v2h6v-2a6 6 0 0 0-3-11z"/><path d="M9.5 19h5"/></svg>
+          </div>
+          <div>
+            <div class="tip-title">Consejo del día</div>
+            <div class="tip-body">Si un mensaje urgente te pide transferir dinero o compartir claves, detente. Verifica siempre por un canal oficial antes de actuar.</div>
+            <span class="tip-link">Leer más</span>
+          </div>
+        </div>
+
+        <!-- 7. Academia SIGAF -->
+        <div class="academy">
+          <svg class="academy-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"><path d="M3 9l9-4 9 4-9 4z"/><path d="M7 12v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4"/></svg>
+          <div class="academy-title">Academia SIGAF</div>
+          <div class="academy-body">Aprende a reconocer fraude bancario, phishing y estafas por mensaje en lecciones de 3 minutos.</div>
+          <span class="academy-btn">Explorar cursos</span>
+        </div>
+
+        <!-- 8. Aviso legal -->
+        <div class="notice">Evaluación probabilística basada en tus análisis recientes. No es una garantía absoluta.</div>
+
+      </div>
+    </div>
+
+    <!-- Barra de navegacion inferior (fija) -->
+    <div class="bottomnav">
+      <div class="navitem active">
+        <div class="navpill">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
+        </div>
+        <span class="navlabel">Inicio</span>
+      </div>
+      <div class="navitem">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/></svg>
+        <span class="navlabel">Analizar</span>
+      </div>
+      <div class="navitem">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+        <span class="navlabel">Alertas</span>
+      </div>
+      <div class="navitem">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        <span class="navlabel">Historial</span>
+      </div>
+      <div class="navitem">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1.2-3.2 3.8-5 7-5s5.8 1.8 7 5"/></svg>
+        <span class="navlabel">Perfil</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="label">Diseño oscuro · paleta de riesgos: Bajo #22C55E · Medio #FACC15 · Alto #F97316 · Crítico #EF4444</div>
+</body>
+</html>

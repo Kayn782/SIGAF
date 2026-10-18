@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Colores del sistema para la ventana (fase previa a Compose).
+        El azul marino evita el destello blanco/negro al abrir la app
+        antes de que Jetpack Compose pinte el primer frame.
+    -->
+    <color name="sigaf_window_background">#050D26</color>
+</resources>

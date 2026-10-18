@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SIGAF</string>
+    <string name="app_full_name">APLICACIÓN MÓVIL DE DETECCIÓN Y ANÁLISIS DE FRAUDE</string>
+
+    <!-- ================================================================
+         Pantalla 1 — Inicio / Entrada (Splash)
+         ================================================================ -->
+    <string name="splash_tagline">Plataforma de ciberseguridad para detectar y prevenir fraudes digitales</string>
+    <string name="splash_enter">INGRESAR AL SISTEMA &gt;</string>
+    <string name="splash_legal">© 2026 SIGAF · Versión 1.0.0</string>
+    <string name="cd_logo">Escudo de SIGAF</string>
+
+    <!-- ================================================================
+         Pantalla 2 — Onboarding / Bienvenida
+         ================================================================ -->
+    <string name="welcome_title">BIENVENIDO A SIGAF</string>
+    <string name="welcome_subtitle">Tu seguridad digital empieza aquí</string>
+
+    <string name="feature_detect_title">Detecta</string>
+    <string name="feature_detect_desc">Amenazas a tiempo</string>
+    <string name="feature_analyze_title">Analiza</string>
+    <string name="feature_analyze_desc">En segundos</string>
+    <string name="feature_prevent_title">Previene</string>
+    <string name="feature_prevent_desc">Antes de actuar</string>
+
+    <string name="cd_feature_detect">Icono de detección de amenazas</string>
+    <string name="cd_feature_analyze">Icono de análisis en segundos</string>
+    <string name="cd_feature_prevent">Icono de prevención de fraudes</string>
+
+    <string name="welcome_start">COMENZAR &gt;</string>
+    <string name="welcome_login">YA TENGO UNA CUENTA</string>
+
+    <!-- ================================================================
+         Pantalla 3 — Permisos de notificaciones
+         ================================================================ -->
+    <string name="cd_permissions_icon">Icono de campana de notificaciones</string>
+    <string name="permissions_title">¿Permitir lectura de notificaciones?</string>
+    <string name="permissions_body">SIGAF revisa las notificaciones de tu dispositivo para avisarte a tiempo cuando detecte intentos de engaño, suplantación o fraude.</string>
+
+    <string name="permissions_bullet_private">Se revisan de forma privada y segura, directamente en tu dispositivo.</string>
+    <string name="permissions_bullet_no_messages">No leemos, guardamos ni compartimos tus mensajes personales.</string>
+    <string name="permissions_bullet_revoke">Puedes desactivar el permiso cuando quieras desde Ajustes.</string>
+
+    <string name="permissions_grant">Otorgar</string>
+    <string name="permissions_deny">Denegar</string>
+    <string name="permissions_legal">Nunca leemos tus mensajes sin tu permiso.</string>
+
+    <!-- ================================================================
+         Destinos pendientes (pantallas provisionales)
+         ================================================================ -->
+    <string name="placeholder_pending">Esta pantalla se construye en el siguiente bloque del proyecto.</string>
+    <string name="placeholder_back">Volver</string>
+    <string name="cd_back">Volver atrás</string>
+
+    <string name="login_title">Inicio de Sesión</string>
+    <string name="register_title">Crear una cuenta</string>
+    <string name="verify_title">Verificación de correo</string>
+    <string name="home_title">Menú Principal</string>
+
+    <!-- Etiquetas de navegación (usadas por la barra inferior cuando exista) -->
+    <string name="nav_analizar">Analizar</string>
+    <string name="nav_alertas">Alertas</string>
+    <string name="nav_historial">Historial</string>
+    <string name="nav_perfil">Perfil</string>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MANIFIESTO DE SIGAF (APLICACIÓN MÓVIL DE DETECCIÓN Y ANÁLISIS DE FRAUDE)
+
+    REGLA DE NEGOCIO 1 — Principio de Mínimo Privilegio:
+    SIGAF NO solicita ser la aplicación de SMS predeterminada ni lee la base de datos
+    interna de SMS. Todo el análisis automático se realizará mediante un
+    NotificationListenerService (creado en el Bloque 5) que el usuario autoriza
+    explícitamente desde Ajustes > Acceso a notificaciones de SIGAF.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Comunicación HTTPS con el backend FastAPI (análisis con IA y registro). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Notificaciones locales de alertas de riesgo (obligatorio desde Android 13). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".SigafApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_sigaf_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SIGAF">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SIGAF"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            BLOQUE 5 (por crear): Escucha pasiva de notificaciones SIN permisos de SMS.
+
+            <service
+                android:name=".background.SigafNotificationListener"
+                android:exported="false"
+                android:label="@string/app_name"
+                android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+                <intent-filter>
+                    <action android:name="android.service.notification.NotificationListenerService" />
+                </intent-filter>
+            </service>
+        -->
+    </application>
+</manifest>

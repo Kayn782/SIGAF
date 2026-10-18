@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Tema base de la Activity. El estilo visual real (colores, tipografía,
+        formas) se define en Kotlin dentro de presentation/theme (Jetpack
+        Compose). Aquí solo preparamos el fondo AZUL MARINO profundo (sin
+        destello blanco) y barras transparentes para enableEdgeToEdge().
+    -->
+    <style name="Theme.SIGAF" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/sigaf_window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
